@@ -1,0 +1,56 @@
+version: '3.4'
+
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  mongo_incidents:
+    image: mongo
+    ports:
+      - "27018:27018"
+
+  incimanager:
+    build:
+      context: ./InciManager_i2b
+    image: incimanager_i2b
+    ports:
+      - "8081:8081"
+    depends_on:
+      - kafka
+      - mongo_incidents
+
+  incidashboard:
+    build:
+      context: ./InciDashboard_i2b
+    image: incidashboard_i2b
+    ports:
+      - "8002:8082"
+    depends_on:
+      - kafka
+      - mongo_incidents
+
+  mongo_agents:
+    image: mongo
+    ports:
+      - "27017:27017"
+
+  agents:
+    build:
+      context: ./Agents_i2b
+    image: agents_i2b
+    ports:
+      - "8000:8080"
+    depends_on:
+      - mongo_agents
