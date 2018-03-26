@@ -18,6 +18,7 @@ services:
 
   mongo_incidents:
     image: mongo
+    command: mongod --port 27018
     ports:
       - "27018:27018"
 
@@ -36,7 +37,7 @@ services:
       context: ./InciDashboard_i2b
     image: incidashboard_i2b
     ports:
-      - "8002:8082"
+      - "8082:8082"
     depends_on:
       - kafka
       - mongo_incidents
@@ -51,6 +52,6 @@ services:
       context: ./Agents_i2b
     image: agents_i2b
     ports:
-      - "8000:8080"
+      - "8080:8080"
     depends_on:
       - mongo_agents
