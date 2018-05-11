@@ -55,11 +55,3 @@ services:
       - "8080:8080"
     depends_on:
       - mongo_agents
-
-  dockbeat:
-    container_name: dockbeat
-    image: ingensi/dockbeat
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./Inci_i2b/dockbeat/:/etc/dockbeat/
-    restart: always
