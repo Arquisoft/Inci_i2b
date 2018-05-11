@@ -1,0 +1,9 @@
+[submodule "Agents_i2b"]
+	path = Agents_i2b
+	url = https://github.com/Arquisoft/Agents_i2b
+[submodule "InciDashboard_i2b"]
+	path = InciDashboard_i2b
+	url = https://github.com/Arquisoft/InciDashboard_i2b
+[submodule "InciManager_i2b"]
+	path = InciManager_i2b
+	url = https://github.com/Arquisoft/InciManager_i2b
